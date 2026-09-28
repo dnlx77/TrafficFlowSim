@@ -1,0 +1,12 @@
+{
+  "name": "traffic-flow-sim",
+  "version-string": "1.0.0",
+  "description": "Microscopic Traffic Flow Simulator and Road Network Editor in Modern C++23",
+  "homepage": "https://localhost/traffic-flow-sim",
+  "supports": "windows & x64 & !uwp",
+  "dependencies": [
+    "sfml",
+    "nlohmann-json",
+    "spdlog"
+  ]
+}

@@ -1,0 +1,17 @@
+# Build output
+build/
+
+# vcpkg local install tree (regenerated from vcpkg.json on first build)
+vcpkg_installed/
+
+# Visual Studio
+.vs/
+*.user
+*.suo
+
+# ImGui runtime-generated window layout
+imgui.ini
+
+# OS
+Thumbs.db
+.DS_Store

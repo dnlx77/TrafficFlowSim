@@ -1,0 +1,38 @@
+<Solution>
+  <Configurations>
+    <Platform Name="x64" />
+  </Configurations>
+  <Folder Name="/modules/">
+    <Project Path="modules/core/core.vcxproj" Id="a1000001-0000-0000-0000-000000000001" />
+    <Project Path="modules/network/network.vcxproj" Id="a1000002-0000-0000-0000-000000000002">
+      <BuildDependency Project="modules/core/core.vcxproj" />
+    </Project>
+    <Project Path="modules/sim/sim.vcxproj" Id="a1000003-0000-0000-0000-000000000003">
+      <BuildDependency Project="modules/core/core.vcxproj" />
+      <BuildDependency Project="modules/network/network.vcxproj" />
+    </Project>
+    <Project Path="modules/persistence/persistence.vcxproj" Id="a1000004-0000-0000-0000-000000000004">
+      <BuildDependency Project="modules/core/core.vcxproj" />
+      <BuildDependency Project="modules/network/network.vcxproj" />
+      <BuildDependency Project="modules/sim/sim.vcxproj" />
+    </Project>
+    <Project Path="modules/ui/ui.vcxproj" Id="a1000005-0000-0000-0000-000000000005">
+      <BuildDependency Project="modules/core/core.vcxproj" />
+      <BuildDependency Project="modules/network/network.vcxproj" />
+      <BuildDependency Project="modules/sim/sim.vcxproj" />
+      <BuildDependency Project="modules/persistence/persistence.vcxproj" />
+      <BuildDependency Project="external/imgui/imgui.vcxproj" />
+    </Project>
+  </Folder>
+  <Folder Name="/external/">
+    <Project Path="external/imgui/imgui.vcxproj" Id="a1000007-0000-0000-0000-000000000007" />
+  </Folder>
+  <Project Path="app/app.vcxproj" Id="a1000006-0000-0000-0000-000000000006">
+    <BuildDependency Project="modules/core/core.vcxproj" />
+    <BuildDependency Project="modules/network/network.vcxproj" />
+    <BuildDependency Project="modules/sim/sim.vcxproj" />
+    <BuildDependency Project="modules/persistence/persistence.vcxproj" />
+    <BuildDependency Project="modules/ui/ui.vcxproj" />
+    <BuildDependency Project="external/imgui/imgui.vcxproj" />
+  </Project>
+</Solution>

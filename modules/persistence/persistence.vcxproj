@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{A1000004-0000-0000-0000-000000000004}</ProjectGuid>
+    <RootNamespace>persistence</RootNamespace>
+    <ProjectName>persistence</ProjectName>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+  </PropertyGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)modules\core\include;$(SolutionDir)modules\network\include;$(SolutionDir)modules\sim\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+
+  <ItemGroup>
+    <ClInclude Include="include\persistence\JsonSerializer.hpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ClCompile Include="src\JsonSerializer.cpp" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(SolutionDir)modules\core\core.vcxproj">
+      <Project>{A1000001-0000-0000-0000-000000000001}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionDir)modules\network\network.vcxproj">
+      <Project>{A1000002-0000-0000-0000-000000000002}</Project>
+    </ProjectReference>
+    <ProjectReference Include="$(SolutionDir)modules\sim\sim.vcxproj">
+      <Project>{A1000003-0000-0000-0000-000000000003}</Project>
+    </ProjectReference>
+  </ItemGroup>
+
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>

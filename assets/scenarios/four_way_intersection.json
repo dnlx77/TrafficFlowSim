@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "mode": "InfrastructureOnly",
+  "nodes": [
+    {"id": 1, "pos": {"x": 0.0, "y": 0.0}, "radius": 15.0, "rule": "TrafficLight", "priority_ranks": []},
+    {"id": 2, "pos": {"x": 0.0, "y": -300.0}, "radius": 12.0, "rule": "PriorityYield", "priority_ranks": []},
+    {"id": 3, "pos": {"x": 300.0, "y": 0.0}, "radius": 12.0, "rule": "PriorityYield", "priority_ranks": []},
+    {"id": 4, "pos": {"x": 0.0, "y": 300.0}, "radius": 12.0, "rule": "PriorityYield", "priority_ranks": []},
+    {"id": 5, "pos": {"x": -300.0, "y": 0.0}, "radius": 12.0, "rule": "PriorityYield", "priority_ranks": []}
+  ],
+  "roads": [
+    {"id": 201, "start": 1, "end": 2, "curved": false, "fwd_lanes": 2, "bwd_lanes": 2, "lane_width": 3.5, "speed_limit": 13.89},
+    {"id": 202, "start": 1, "end": 3, "curved": false, "fwd_lanes": 2, "bwd_lanes": 2, "lane_width": 3.5, "speed_limit": 13.89},
+    {"id": 203, "start": 1, "end": 4, "curved": false, "fwd_lanes": 2, "bwd_lanes": 2, "lane_width": 3.5, "speed_limit": 13.89},
+    {"id": 204, "start": 1, "end": 5, "curved": false, "fwd_lanes": 2, "bwd_lanes": 2, "lane_width": 3.5, "speed_limit": 13.89}
+  ],
+  "spawners": [
+    {"lane": {"road": 201, "fwd": false, "idx": 0}, "flow_rate_vph": 500.0, "truck_ratio": 0.1, "aggressive_ratio": 0.1, "enabled": true},
+    {"lane": {"road": 202, "fwd": false, "idx": 0}, "flow_rate_vph": 500.0, "truck_ratio": 0.1, "aggressive_ratio": 0.1, "enabled": true},
+    {"lane": {"road": 203, "fwd": false, "idx": 0}, "flow_rate_vph": 500.0, "truck_ratio": 0.1, "aggressive_ratio": 0.1, "enabled": true},
+    {"lane": {"road": 204, "fwd": false, "idx": 0}, "flow_rate_vph": 500.0, "truck_ratio": 0.1, "aggressive_ratio": 0.1, "enabled": true}
+  ]
+}

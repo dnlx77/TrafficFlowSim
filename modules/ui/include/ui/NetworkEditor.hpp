@@ -58,6 +58,7 @@ namespace tfs::ui {
 
         static core::NodeId findNearestNode(core::Vec2 pos, const network::RoadNetwork& net, float max_dist);
         static core::RoadId findNearestRoad(core::Vec2 pos, const network::RoadNetwork& net, float max_dist, core::Vec2& out_closest);
+        static core::LaneRef findNearestLane(core::Vec2 pos, const network::RoadNetwork& net, float max_dist, core::Vec2& out_closest);
         static core::VehicleId findNearestVehicle(core::Vec2 pos, const sim::SimulationWorld& world, float max_dist);
     };
 }

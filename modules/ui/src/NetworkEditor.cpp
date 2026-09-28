@@ -32,6 +32,31 @@ namespace tfs::ui {
         return best;
     }
 
+    core::LaneRef NetworkEditor::findNearestLane(core::Vec2 pos, const network::RoadNetwork& net, float max_dist,
+                                                  core::Vec2& out_closest) {
+        core::LaneRef best{};
+        float best_dist = max_dist;
+
+        for (const auto& [id, road] : net.roads()) {
+            const auto check_lanes = [&](const std::vector<network::Lane>& lanes) {
+                for (const network::Lane& lane : lanes) {
+                    core::Vec2 closest;
+                    float s = 0.0f;
+                    const float d = lane.center_curve.projectPoint(pos, closest, s);
+                    if (d < best_dist) {
+                        best_dist = d;
+                        best = lane.ref;
+                        out_closest = closest;
+                    }
+                }
+            };
+            check_lanes(road.forward_lanes);
+            check_lanes(road.backward_lanes);
+        }
+
+        return best;
+    }
+
     core::VehicleId NetworkEditor::findNearestVehicle(core::Vec2 pos, const sim::SimulationWorld& world, float max_dist) {
         core::VehicleId best = core::INVALID_ID;
         float best_dist = max_dist;
@@ -81,24 +106,22 @@ namespace tfs::ui {
                 }
                 case EditorTool::PlaceSpawner: {
                     core::Vec2 closest;
-                    const core::RoadId rid = findNearestRoad(world_pos, net, 20.0f, closest);
-                    if (rid == core::INVALID_ID) break;
-                    if (const network::RoadSegment* road = net.findRoad(rid); road && !road->forward_lanes.empty()) {
-                        sim::Spawner spawner;
-                        spawner.target_lane = road->forward_lanes.front().ref;
-                        world.addSpawner(spawner);
-                    }
+                    const core::LaneRef lane_ref = findNearestLane(world_pos, net, 20.0f, closest);
+                    if (lane_ref.road_id == core::INVALID_ID) break;
+                    sim::Spawner spawner;
+                    spawner.target_lane = lane_ref;
+                    world.addSpawner(spawner);
                     break;
                 }
                 case EditorTool::SpawnSingleVehicle: {
                     core::Vec2 closest;
-                    const core::RoadId rid = findNearestRoad(world_pos, net, 20.0f, closest);
-                    if (rid == core::INVALID_ID) break;
-                    if (const network::RoadSegment* road = net.findRoad(rid); road && !road->forward_lanes.empty()) {
+                    const core::LaneRef lane_ref = findNearestLane(world_pos, net, 20.0f, closest);
+                    if (lane_ref.road_id == core::INVALID_ID) break;
+                    if (const network::Lane* lane = net.findLane(lane_ref)) {
                         core::Vec2 tmp;
                         float s_out = 0.0f;
-                        [[maybe_unused]] const float dist = road->forward_lanes.front().center_curve.projectPoint(world_pos, tmp, s_out);
-                        world.spawnVehicleManual(road->forward_lanes.front().ref, s_out, spawn_class_);
+                        [[maybe_unused]] const float dist = lane->center_curve.projectPoint(world_pos, tmp, s_out);
+                        world.spawnVehicleManual(lane_ref, s_out, spawn_class_);
                     }
                     break;
                 }
